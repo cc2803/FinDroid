@@ -1,0 +1,334 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/toys/protos/RubberDuck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/balls/protos/FifaSoccerBall.proto"
+EXTERNPROTO "../protos/MobilePhone.proto"
+EXTERNPROTO "../protos/Wallet.proto"
+EXTERNPROTO "../protos/Keys.proto"
+EXTERNPROTO "../protos/Jewelry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/apartment_structure/protos/Wall.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.45027878732227467 -0.7287841043242088 -0.5158708588124961 4.55717322101953
+  position 0.515924302602379 -2.1944920764391562 19.348865862121624
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+}
+Wall {
+  translation 0 -2 0
+  rotation 0 0 1 0.7853996938995746
+  size 0.2 3 2.4
+}
+Wall {
+  translation 0 -3 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(1)"
+  size 0.2 8 2.4
+}
+Wall {
+  translation -2.6 3 0
+  rotation 0 0 1 -0.5236003061004253
+  name "wall(2)"
+  size 0.2 2 2.4
+}
+Wall {
+  translation -4 1 0
+  name "wall(3)"
+  size 0.2 5 2.4
+}
+Wall {
+  translation 2 3 0
+  name "wall(4)"
+  size 0.2 2 2.4
+}
+Wall {
+  translation 0 4 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(5)"
+  size 0.2 8 2.4
+}
+Wall {
+  translation 4 0 0
+  name "wall(6)"
+  size 0.2 9 2.4
+}
+Jewelry {
+  translation -1 -2 0.00997069
+}
+Keys {
+  translation 1 2 0.0399767
+}
+Wallet {
+  translation -1 1 0.00745754
+}
+MobilePhone {
+  translation 2 -2 0.00496052
+}
+DEF rover Robot {
+  translation 0 0 0.0929574
+  rotation 0.0014095010297252894 0.002055318890148212 -0.9999968944807313 0.7853996938995746
+  children [
+    Camera {
+      translation 0.29 -0.1 0.1
+      children [
+        DEF cambox Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "CAM"
+      boundingObject USE cambox
+      physics Physics {
+      }
+      width 640
+      height 480
+      recognition Recognition {
+      }
+    }
+    DEF ds_left DistanceSensor {
+      translation 0.36 0.1 0
+      rotation 0 0 1 0.3927
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.196078 0.0901961
+          }
+          geometry Box {
+            size 0.025 0.025 0.025
+          }
+        }
+      ]
+      name "ds_left"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+      numberOfRays 2
+      resolution 1024
+    }
+    DEF ds_right DistanceSensor {
+      translation 0.36 -0.1 0
+      rotation 0 0 1 -0.3927
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.196078 0.0901961
+          }
+          geometry Box {
+            size 0.025 0.025 0.025
+          }
+        }
+      ]
+      name "ds_right"
+      boundingObject USE sensor
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.4 1000 0
+      ]
+      numberOfRays 2
+    }
+    DEF body Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.3 0.3
+        metalness 0
+      }
+      geometry Box {
+        size 0.7 0.4 0.1
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 10.111132864849983
+        axis 0 1 0
+        anchor 0.175 0.225 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.175 0.225 0
+        rotation 0.24496299694930318 -0.6855618006680357 0.6855641090302323 2.6611294802994507
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.552941 0.47451
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF Physics_wh Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 10.115146398509925
+        axis 0 1 0
+        anchor 0.175 -0.225 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.175 -0.225 0
+        rotation 0.24642153384197119 -0.6853003958181353 0.6853027033001383 2.658378478936964
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.552941 0.47451
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics DEF Physics_wh Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 10.106504905892534
+        axis 0 1 0
+        anchor -0.175 0.225 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel3"
+        }
+      ]
+      endPoint Solid {
+        translation -0.175 0.225 0
+        rotation 0.24328170710870237 -0.6858610803825655 0.6858633897524604 2.6643029255871804
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.552941 0.47451
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE wheel
+        physics DEF Physics_wh Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 10.11113762827625
+        axis 0 1 0
+        anchor -0.175 -0.225 0
+      }
+      device [
+        RotationalMotor {
+          name "wheel4"
+        }
+      ]
+      endPoint Solid {
+        translation -0.175 -0.225 0
+        rotation 0.24496472774622308 -0.6855614914462059 0.6855637998073356 2.6611262146770893
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0.6 0.552941 0.47451
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE wheel
+        physics DEF Physics_wh Physics {
+        }
+      }
+    }
+    DEF LIDAR_support Shape {
+      appearance PBRAppearance {
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.05
+      }
+    }
+    Lidar {
+      translation 0 0 0.24
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.01
+            radius 0.05
+          }
+        }
+      ]
+      name "LIDAR"
+      numberOfLayers 5
+    }
+    DEF IMU InertialUnit {
+      translation -0.2 0 0.1
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 1
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "IMU"
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "obj_nav"
+}
+RubberDuck {
+  translation 3 2 0.0598843
+  rotation -8.558350000081497e-08 -0.9999999999999963 -1.7596072263600195e-11 8.855163413452788e-07
+  scale 3
+}
+FifaSoccerBall {
+  translation -3.6 -1 0.111825
+}
